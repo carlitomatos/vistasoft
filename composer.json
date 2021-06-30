@@ -1,0 +1,23 @@
+{
+    "name": "carlito/desafio_tecnico_vistasoft",
+    "description": "Sistema de gestão de locação para imobiliárias",
+    "authors": [
+        {
+            "name": "Carlito Matos dos Santos",
+            "email": "carlitomatos21@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Controller\\": "app/controller/",
+            "Model\\": "app/model/",
+            "Src\\": "src/"
+        },
+        "files" : [
+            "src/helpers/helper_routes.php",
+            "src/helpers/helper_app.php"
+        ]
+    }
+}
