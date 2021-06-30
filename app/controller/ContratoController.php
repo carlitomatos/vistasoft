@@ -18,13 +18,6 @@ class ContratoController extends Controller {
 
     public function list(){
         $contratos = Contrato::all('',$this->join);
-        $dataInicial = date_create_from_format($this->format,'1993-07-04');
-        $dataFinal = date_create_from_format($this->format,'1993-07-10');
-
-        $lastDay = date("Y-m-t", $dataInicial->getTimestamp());
-        $firstDay = date_create_from_format($this->format,date("Y-m-01", $dataInicial->getTimestamp()));
-        dd($firstDay);
-        dd($dataInicial->diff($dataFinal));
         return response($contratos)->send();
     }
 
