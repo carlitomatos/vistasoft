@@ -11,7 +11,7 @@ class ClienteController extends Controller {
     private  $join = 'pessoas ON pessoas.pessoa_id = clientes.pessoa_id';
 
     public function list(){
-        $clientes = Cliente::all('',$this->join());
+        $clientes = Cliente::all('',$this->join);
         return response($clientes)->send();
     }
 

@@ -37,7 +37,7 @@ CREATE TABLE imoveis(
 imovel_id INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
 endereco_id INT NOT NULL,
 proprietario_id INT NOT NULL,
-FOREIGN KEY (endereco_id) REFERENCES enderecos (endereco_id)
+FOREIGN KEY (endereco_id) REFERENCES enderecos (endereco_id),
 FOREIGN KEY (proprietario_id) REFERENCES proprietarios (proprietario_id)
 );
 
@@ -61,6 +61,8 @@ CREATE TABLE mensalidades(
 id INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
 contrato_id INT NOT NULL,
 valor DECIMAL(10,2),
+vencimento DATE,
+paga BOOLEAN DEFAULT FALSE,
 FOREIGN KEY (contrato_id) REFERENCES contratos (contrato_id)
 );
 
@@ -68,5 +70,7 @@ CREATE TABLE repasses(
 id INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
 contrato_id INT NOT NULL,
 valor DECIMAL(10,2),
+data_repasse DATE,
+realizado BOOLEAN DEFAULT FALSE,
 FOREIGN KEY (contrato_id) REFERENCES contratos (contrato_id)
 );

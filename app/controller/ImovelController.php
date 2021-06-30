@@ -9,8 +9,8 @@ use Src\Controller;
 
 class ImovelController extends Controller{
 
-    private $join = 'proprietarios ON proprietarios.proprietario_id = imoveis.proprietarios_id '.
-    'JOIN enderecos on enderecos.endereco_id = imoveis.enderecos_id';
+    private $join = 'proprietarios ON proprietarios.proprietario_id = imoveis.proprietario_id '.
+    'JOIN enderecos on enderecos.endereco_id = imoveis.endereco_id';
 
     public function list(){
         $imoveis = Imovel::all('',$this->join);
