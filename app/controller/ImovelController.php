@@ -12,6 +12,10 @@ class ImovelController extends Controller{
     private $join = 'proprietarios ON proprietarios.proprietario_id = imoveis.proprietario_id '.
     'JOIN enderecos on enderecos.endereco_id = imoveis.endereco_id';
 
+    public function index(){
+        return view('imoveis/index.php');
+    }
+
     public function list(){
         $imoveis = Imovel::all('',$this->join);
         return response($imoveis)->send();

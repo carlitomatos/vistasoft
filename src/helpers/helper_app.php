@@ -6,3 +6,7 @@ function dd($data){
     echo '</pre>';
     die();
 }
+
+function url($uri){
+    return request()->getBaseUrl().$uri;
+}

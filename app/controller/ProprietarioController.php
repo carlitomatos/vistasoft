@@ -10,6 +10,11 @@ use Src\Controller;
 class ProprietarioController extends Controller{
 
     private $join = 'pessoas ON pessoas.pessoa_id = proprietarios.pessoa_id';
+
+    public function index(){
+        return view('proprietarios/index.php');
+    }
+
     public function list(){
         $proprietarios = Proprietario::all('',$this->join );
         return response($proprietarios)->send();

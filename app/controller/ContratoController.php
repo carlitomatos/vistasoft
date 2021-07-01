@@ -16,6 +16,10 @@ class ContratoController extends Controller {
     .'JOIN imoveis ON imoveis.imovel_id = contratos.imovel_id';
     private $format = 'Y-m-d';
 
+    public function index(){
+        return view('contratos/index.php');
+    }
+
     public function list(){
         $contratos = Contrato::all('',$this->join);
         return response($contratos)->send();

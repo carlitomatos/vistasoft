@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Cliente;
+use Model\Contrato;
 use Model\Pessoa;
 use Src\Controller;
 
@@ -10,8 +11,31 @@ class ClienteController extends Controller {
 
     private  $join = 'pessoas ON pessoas.pessoa_id = clientes.pessoa_id';
 
+    public function index(){
+        return view('clientes/index.php');
+    }
+
+
     public function list(){
-        $clientes = Cliente::all('',$this->join);
+        $dados = $this->request->all();
+
+
+        if(isset($dados["draw"])){
+            $clientes = Cliente::all('',$this->join, $dados["length"], $dados["start"]);
+            $count = Cliente::count();
+            $return = [
+                "draw" => $dados["draw"],
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $clientes,
+                "dados"=> $dados,
+            ];
+
+            return  response($return)->send();
+        }
+
+        $clientes = Cliente::all('',$this->join, 50);
+
         return response($clientes)->send();
     }
 
@@ -54,7 +78,7 @@ class ClienteController extends Controller {
 
         if($cliente){
             $pessoa = new Pessoa();
-            $pessoa->pessoa_id = $cliente[0]['pessoa_id'];
+            $pessoa->pessoa_id = $cliente->pessoa_id;
             $pessoa->nome = $dados["nome"];
             $pessoa->email = $dados["email"];
             $pessoa->telefone = $dados["telefone"];
@@ -71,6 +95,11 @@ class ClienteController extends Controller {
 
     public function delete($id){
         $cliente = Cliente::find($id, $this->join);
+        $contratos = Contrato::count('*','cliente_id = '. $cliente->cliente_id);
+
+        if($contratos > 0){
+            return response(['msg'=>'Não é possível excluir pois o CLiente possui contratos'],409)->send();
+        }
 
         if($cliente){
             $pessoa = Pessoa::find($cliente->pessoa_id);

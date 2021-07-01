@@ -1,37 +1,55 @@
 <?php
 $params = $this->getParams();
 ?>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>VistaSoft</title>
+
+    <!-- page css -->
+
+    <!-- Core css -->
+    <link href="<?php echo url('css/app.min.css');?>" rel="stylesheet">
+
 </head>
+
 <body>
-<div id="app">
-    <h1>Teste <?php echo $params["teste"];?></h1>
-    <h2>{{ message }}</h2>
-    <span v-bind:title="message">
-        Pare o mouse sobre mim e veja a dica interligada dinamicamente!
-    </span>
+<div class="app">
+    <div class="layout">
+        <?php include_once 'layout/header.php'?>
+        <?php include_once 'layout/side.php'?>
+
+
+
+        <!-- Page Container START -->
+        <div class="page-container">
+
+            <!-- Content Wrapper START -->
+            <div class="main-content">
+                <div class="page-header">
+                    <h2 class="header-title">Início</h2>
+                    <div class="header-sub-title">
+                        <nav class="breadcrumb breadcrumb-dash">
+                            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Início</a>
+                        </nav>
+                    </div>
+                </div>
+                <!-- Content goes Here -->
+            </div>
+            <!-- Content Wrapper END -->
+
+        </div>
+        <!-- Page Container END -->
+    </div>
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Olá Vue!'
-        }
-    })
-</script>
+<script src="<?php echo url('js/vendors.min.js');?>"></script>
+<script src="<?php echo url('js/app.min.js');?>"></script>
 
 </body>
+
 </html>

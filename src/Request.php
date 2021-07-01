@@ -8,6 +8,7 @@ class Request{
     protected $uri;
     protected $method;
     protected $protocol;
+    protected $server;
     protected $data = [];
 
     public function __construct(){
@@ -15,6 +16,7 @@ class Request{
         $this->uri = $_REQUEST['uri'] ?? '/';
         $this->method = strtolower($_SERVER['REQUEST_METHOD']);
         $this->protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+        $this->server = $_SERVER['SERVER_NAME'];
         $this->setData();
 
         if(count($_FILES) > 0 ){
@@ -52,6 +54,11 @@ class Request{
 
     public function method(){
         return $this->method;
+    }
+
+    public function getBaseUrl(){
+        return $this->protocol . '://'.($this->server == 'localhost' ? $this->server . '/'
+                . explode('/',$this->base)[1] . '/' : $this->server);
     }
 
     public function all(){

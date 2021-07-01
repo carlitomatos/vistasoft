@@ -3,14 +3,15 @@
 use Src\Route as Route;
 
 //Rotas Site
-Route::get('/', function (){
-    view('index.php',["teste"=>"123"]);
-});
+Route::get(['set'=>'/', 'as'=>'index'], function (){
+    view('index.php');
+} );
 
-
-
-
-
+Route::get(['set'=>'/clientes', 'as'=>'clientes'],'ClienteController@index');
+Route::get(['set'=>'/clientes/editar/{id}', 'as'=>'clientes'],'ClienteController@editar');
+Route::get(['set'=>'/proprietarios', 'as'=>'proprietarios'],'ProprietarioController@index');
+Route::get(['set'=>'/imoveis', 'as'=>'imoveis'],'ImovelController@index');
+Route::get(['set'=>'/contratos', 'as'=>'contratos'],'ContratoController@index');
 
 
 //Rotas API

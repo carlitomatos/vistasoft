@@ -40,7 +40,7 @@ class Response{
         http_response_code($this->status);
 
 
-        echo json_encode($response);
+        echo json_encode($this->data);
         die();
     }
 
