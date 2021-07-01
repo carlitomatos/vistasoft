@@ -3,8 +3,10 @@
 
 namespace Controller;
 
+use Model\Contrato;
 use Model\Pessoa;
 use Model\Proprietario;
+use Model\Repasse;
 use Src\Controller;
 
 class ProprietarioController extends Controller{
@@ -16,6 +18,22 @@ class ProprietarioController extends Controller{
     }
 
     public function list(){
+        $dados = $this->request->all();
+
+
+        if(isset($dados["draw"])){
+            $clientes = Proprietario::all('',$this->join, $dados["length"], $dados["start"]);
+            $count = Proprietario::count();
+            $return = [
+                "draw" => $dados["draw"],
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $clientes,
+                "dados"=> $dados,
+            ];
+
+            return  response($return)->send();
+        }
         $proprietarios = Proprietario::all('',$this->join );
         return response($proprietarios)->send();
     }
@@ -23,7 +41,15 @@ class ProprietarioController extends Controller{
     public function details($id){
         $proprietario = Proprietario::find($id, $this->join);
         if($proprietario){
-            return response($proprietario->toArray())->send();
+            $contratos = Contrato::all('proprietario_id = '. $proprietario->proprietario_id );
+            foreach ($contratos as $contrato){
+                $repasses = Repasse::all('contrato_id = '. $contrato["contrato_id"]);
+                $contrato["repasses"] = $repasses;
+            }
+            $proprietario = $proprietario->toArray();
+            $proprietario["contratos"] = $contratos;
+
+            return response($proprietario)->send();
         }
 
         return response(["msg"=>"Proprietario não encontrado"], 404)->send();

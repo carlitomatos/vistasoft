@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Cliente;
 use Model\Contrato;
+use Model\Mensalidade;
 use Model\Pessoa;
 use Src\Controller;
 
@@ -36,13 +37,23 @@ class ClienteController extends Controller {
 
         $clientes = Cliente::all('',$this->join, 50);
 
+
+
         return response($clientes)->send();
     }
 
     public function details($id){
         $cliente = Cliente::find($id, $this->join);
+
         if($cliente){
-            return response($cliente->toArray())->send();
+            $contratos = Contrato::all('cliente_id = '. $cliente->cliente_id );
+            foreach ($contratos as $contrato){
+                $mensalidades = Mensalidade::all('contrato_id = '. $contrato["contrato_id"]);
+                $contrato["mensalidades"] = $mensalidades;
+            }
+            $cliente = $cliente->toArray();
+            $cliente["contratos"]  = $contratos;
+            return response($cliente)->send();
         }
 
         return response(["msg"=>"Cliente não encontrado"], 404)->send();

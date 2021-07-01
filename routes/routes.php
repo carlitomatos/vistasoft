@@ -8,7 +8,6 @@ Route::get(['set'=>'/', 'as'=>'index'], function (){
 } );
 
 Route::get(['set'=>'/clientes', 'as'=>'clientes'],'ClienteController@index');
-Route::get(['set'=>'/clientes/editar/{id}', 'as'=>'clientes'],'ClienteController@editar');
 Route::get(['set'=>'/proprietarios', 'as'=>'proprietarios'],'ProprietarioController@index');
 Route::get(['set'=>'/imoveis', 'as'=>'imoveis'],'ImovelController@index');
 Route::get(['set'=>'/contratos', 'as'=>'contratos'],'ContratoController@index');

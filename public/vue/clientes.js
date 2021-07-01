@@ -53,13 +53,24 @@ var app = new Vue({
         apagar: function (id){
             axios.delete(urlApiClientesDelete + '/' + id)
                 .then(function (response) {
-                    console.log(response);
+
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
             this.tblClientes.ajax.reload();
+        },
+        detalhes: function (id){
+            axios.get(urlApiClientesDelete + '/' + id)
+                .then(function (response) {
+                    console.log(response);
+                    app.cliente = response.data;
+                    $('.detalhes-cliente').modal('show');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     },
     mounted(){
@@ -77,10 +88,19 @@ var app = new Vue({
                 {
                     "data": null,
                     "render": function (data, type, row) {
-                        return '<button onclick="app.editarCliente('+"'"+row.cliente_id+"'" +')" class="btn btn-warning">Editar</button>' +
-                         '<button onclick="app.apagar('+"'"+row.cliente_id+"'" +')" class="btn btn-danger">Apagar</button>'
+                        return '<div>' +
+                                    //'<div class="col">'+
+                                        '<button onclick="app.editarCliente('+"'"+row.cliente_id+"'" +')" class="btn btn-warning m-r-5">Editar</button>' +
+                                   // '</div>'+
+                                   // '<div class="col">'+
+                                        '<button onclick="app.detalhes('+"'"+row.cliente_id+"'" +')" class="btn btn-info m-r-5">Detalhes</button>' +
+                                   // '</div>'+
+                                   // '<div class="col">'+
+                                        '<button onclick="app.apagar('+"'"+row.cliente_id+"'" +')" class="btn btn-danger m-r-5">Apagar</button>' +
+                                   // '</div>'+
+                            '</div>'
                     },
-                    "className":'exames'
+                    "orderable": false
                 },
             ],
 

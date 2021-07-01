@@ -134,10 +134,107 @@ $params = $this->getParams();
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                                <button type="submit" class="btn btn-success">Atualizar</button>
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade detalhes-cliente">
+        <div class="modal-dialog modal-dialog-scrollable  modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h4">{{cliente.nome}}</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="anticon anticon-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex">
+                        <ul class="nav nav-tabs flex-column" id="detalhes" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="cliente-tab-vertical" data-toggle="tab" href="#cliente-vertical" role="tab" aria-controls="cliente-vertical" aria-selected="true">Detalhes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="mensalidades-tab-vertical" data-toggle="tab" href="#mensalidades-vertical" role="tab" aria-controls="profile-vertical" aria-selected="false">Mensalidades</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content m-l-15" id="myTabContentVertical">
+                            <div class="tab-pane fade show active" id="cliente-vertical" role="tabpanel" aria-labelledby="cliente-tab-vertical">
+                                 <form ref="detalhesForm" v-on:submit.prevent>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Nome</label>
+                                        <div class="col-sm-10">
+                                            <input readonly type="text" v-model="cliente.nome" class="form-control"  name="nome" placeholder="Nome">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input readonly type="email" v-model="cliente.email" class="form-control" name="email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Telefone</label>
+                                        <div class="col-sm-9">
+                                            <input readonly type="text" v-model="cliente.telefone" class="form-control"  name="telefone" placeholder="Telefone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-success">Atualizar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="mensalidades-vertical" role="tabpanel" aria-labelledby="mensalidades-tab-vertical">
+                                <div class="accordion borderless" id="listaContratos">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">
+                                                <a data-toggle="collapse" href="#mensalidadesContrato">
+                                                    <span>Contrato nº 1</span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="mensalidadesContrato" class="collapse show" data-parent="#listaContratos">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Parcela</th>
+                                                            <th scope="col">Valor</th>
+                                                            <th scope="col">Vencimento</th>
+                                                            <th scope="col">Paga</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">1</th>
+                                                                <td>Mark</td>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">2</th>
+                                                                <td>Jacob</td>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

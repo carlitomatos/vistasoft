@@ -10,13 +10,30 @@ use Src\Controller;
 class ImovelController extends Controller{
 
     private $join = 'proprietarios ON proprietarios.proprietario_id = imoveis.proprietario_id '.
-    'JOIN enderecos on enderecos.endereco_id = imoveis.endereco_id';
+    'JOIN pessoas ON pessoas.pessoa_id = proprietarios.pessoa_id '.
+    'JOIN enderecos ON enderecos.endereco_id = imoveis.endereco_id';
 
     public function index(){
         return view('imoveis/index.php');
     }
 
     public function list(){
+        $dados = $this->request->all();
+
+
+        if(isset($dados["draw"])){
+            $clientes = Imovel::all('',$this->join, $dados["length"], $dados["start"]);
+            $count = Imovel::count();
+            $return = [
+                "draw" => $dados["draw"],
+                "recordsTotal" => $count,
+                "recordsFiltered" => $count,
+                "data" => $clientes,
+                "dados"=> $dados,
+            ];
+
+            return  response($return)->send();
+        }
         $imoveis = Imovel::all('',$this->join);
         return response($imoveis)->send();
     }
